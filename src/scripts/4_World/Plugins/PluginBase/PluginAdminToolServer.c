@@ -1,6 +1,6 @@
 modded class PluginAdminTool
 {
-	const string ROOT_ADMIN_UID = "76561198061847702";
+	const string ROOT_ADMIN_UID = "NOT SET";
 	
 	ref PluginAdminTool_Options m_options;
 	ref array<ref CorpseData> m_corpsePtr;
