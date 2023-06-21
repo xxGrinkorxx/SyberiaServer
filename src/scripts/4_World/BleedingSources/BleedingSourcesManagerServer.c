@@ -310,7 +310,7 @@ modded class BleedingSourcesManagerServer
 					SetConcussionHit(true, false);
 				}
 				
-				if (m_Player.IsFaceBlocked(false))
+				if (m_Player.IsFaceBlocked(true))
 				{
 					zvirusInfectionChance = zvirusInfectionChance * 0.5;
 				}
