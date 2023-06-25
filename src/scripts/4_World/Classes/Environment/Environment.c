@@ -166,8 +166,11 @@ modded class Environment
 		if (item.IsTemperatureVisible())
 		{
 			float itemTemperature = item.GetTemperature();
-			if (itemTemperature > envTemperature) item.AddTemperature( GameConstants.TEMPERATURE_ITEM_HEAT_TRANSFER_COEF * -1.0 );
-			else item.AddTemperature( GameConstants.TEMPERATURE_ITEM_HEAT_TRANSFER_COEF );
+			if (itemTemperature > envTemperature) 
+			{			
+				item.AddTemperature( Math.Max( GameConstants.ENVIRO_TICK_RATE * GameConstants.TEMPERATURE_ITEM_HEAT_TRANSFER_COEF * -1.0, envTemperature - itemTemperature ));
+			}					
+			else item.AddTemperature( Math.Min( GameConstants.ENVIRO_TICK_RATE * GameConstants.TEMPERATURE_ITEM_HEAT_TRANSFER_COEF, envTemperature - itemTemperature ));
 		}
 		
 		if (!item.GetInventory())
