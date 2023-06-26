@@ -37,8 +37,14 @@ modded class ItemBase
 				// cooling on ground
 				if ( !IsFireplace() )
 				{
-					if (itemTemperature > envTemperature) AddTemperature( delta * GameConstants.TEMPERATURE_RATE_COOLING_GROUND );
-					else AddTemperature( delta * GameConstants.TEMPERATURE_RATE_COOLING_GROUND * -1.0 );
+					if (itemTemperature > envTemperature) 
+					{
+						AddTemperature( Math.Max( delta * GameConstants.TEMPERATURE_RATE_COOLING_GROUND, envTemperature - itemTemperature ));
+					}
+					else if  (itemTemperature < envTemperature) 
+					{
+						AddTemperature( Math.Min( delta * GameConstants.TEMPERATURE_RATE_COOLING_GROUND * -1.0, envTemperature - itemTemperature ));
+					}
 				}
 			}
 			else if ( refParentIB )
@@ -49,13 +55,25 @@ modded class ItemBase
 					if (refParentIB.CanHaveTemperature_SybInternalAccess())
 					{
 						float parentTemperature = refParentIB.GetTemperature();
-						if (itemTemperature > parentTemperature) AddTemperature( delta * GameConstants.TEMPERATURE_RATE_COOLING_INSIDE );
-						else AddTemperature( delta * GameConstants.TEMPERATURE_RATE_COOLING_INSIDE * -1.0 );
+						if (itemTemperature > parentTemperature) 
+						{
+							AddTemperature( Math.Max( delta * GameConstants.TEMPERATURE_RATE_COOLING_INSIDE , parentTemperature - itemTemperature ));
+						}
+						else if (itemTemperature < parentTemperature) 
+						{
+							AddTemperature( Math.Min( delta * GameConstants.TEMPERATURE_RATE_COOLING_INSIDE * -1.0 , parentTemperature - itemTemperature ));
+						}
 					}
 					else
 					{
-						if (itemTemperature > envTemperature) AddTemperature( delta * GameConstants.TEMPERATURE_RATE_COOLING_INSIDE );
-						else AddTemperature( delta * GameConstants.TEMPERATURE_RATE_COOLING_INSIDE * -1.0 );
+						if (itemTemperature > envTemperature) 
+						{
+							AddTemperature( Math.Max( delta * GameConstants.TEMPERATURE_RATE_COOLING_INSIDE , envTemperature - itemTemperature ));
+						}
+						else if (itemTemperature < envTemperature) 
+						{
+							AddTemperature( Math.Min( delta * GameConstants.TEMPERATURE_RATE_COOLING_INSIDE * -1.0 , envTemperature - itemTemperature ));
+						}
 					}
 				}
 			}
