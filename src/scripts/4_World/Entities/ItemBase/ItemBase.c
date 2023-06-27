@@ -26,6 +26,19 @@ modded class ItemBase
 		
 		if ( !hasRootAsPlayer )
 		{
+
+		#ifdef NAMALSK_SURVIVAL	
+		//Remove additional wetness from namalsk
+		if(HasWetness())
+		{
+			float itemWetness = GetWet();
+			if (itemWetness > 1)
+			{
+				AddWet(1 - itemWetness);
+			}
+		}
+		#endif
+
 			Mission mission = GetGame().GetMission();
 			if (!mission || !mission.GetWorldData())
 				return;

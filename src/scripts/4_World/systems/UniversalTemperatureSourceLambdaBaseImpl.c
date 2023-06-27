@@ -19,7 +19,15 @@ modded class UniversalTemperatureSourceLambdaBaseImpl : UniversalTemperatureSour
 			{
 				distance = vector.Distance(nearestItem.GetPosition(), pSettings.m_Position);
 				distance = Math.Max(distance, 0.1);	//min distance cannot be 0 (division by zero)
-				
+			
+			#ifdef NAMALSK_SURVIVAL	
+			//Remove additional wetness from namalsk
+			if (nearestItem.GetWet() > 1)
+			{
+				nearestItem.AddWet(1 - nearestItem.GetWet());
+			}
+			#endif
+
 				float dryModifier = 0;				
 				
 				if (nearestItem.GetWet() >= GameConstants.STATE_DAMP)

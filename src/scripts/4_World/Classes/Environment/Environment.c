@@ -164,9 +164,23 @@ modded class Environment
 	
 	protected void ProcessItemHeat(ItemBase item, int depth, float envTemperature)
 	{
+
+		#ifdef NAMALSK_SURVIVAL
+		//Remove additional wetness from namalsk
+		if(item.HasWetness())
+		{
+			float itemWetness = item.GetWet();
+			if (itemWetness > 1)
+			{
+				item.AddWet(1 - itemWetness);
+			}
+		}
+		#endif
+		
 		if (item.IsTemperatureVisible())
 		{
 			float itemTemperature = item.GetTemperature();
+			
 			if (itemTemperature > envTemperature) 
 			{			
 				item.AddTemperature( Math.Max( GameConstants.ENVIRO_TICK_RATE * GameConstants.TEMPERATURE_ITEM_HEAT_TRANSFER_COEF * -1.0, envTemperature - itemTemperature ));
