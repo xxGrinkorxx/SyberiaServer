@@ -158,7 +158,7 @@ modded class Environment
 
 		pHeatComfort = ( pHeatComfort / pBodyPartIds.Count() ) * pCoef;
 		pHeat = ( pHeat / pBodyPartIds.Count() ) * pCoef;
-		pHeat -= GameConstants.TEMPERATURE_ITEMS_HEAT_IN_INVENTORY_FROM_BODY;
+		//pHeat -= GameConstants.TEMPERATURE_ITEMS_HEAT_IN_INVENTORY_FROM_BODY;
 		pHeat += m_Player.GetPerkFloatValue(SyberiaPerkType.SYBPERK_SURVIVAL_FROST_RESIST, 0, 0) * GetSyberiaConfig().m_additionalTemperatureResistForSurvivalSkill;
 	}
 	
