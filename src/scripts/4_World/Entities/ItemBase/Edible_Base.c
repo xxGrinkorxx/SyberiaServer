@@ -160,6 +160,45 @@ modded class Edible_Base
 						added_item.SetHealth01("", "", skinningMod);
 					}
 				}
+				else if (skinningChildName == "ObtainedFeathers")
+				{
+					if (count > 0) 
+					{
+					array<float> quant_min_max_coef = new array<float>;
+					string cfg_animal_class_path = "cfgVehicles " + GetType() + " " + "Skinning ";
+					string cfg_skinning_organ_class = cfg_animal_class_path + skinningChildName + " ";
+					
+					GetGame().ConfigGetFloatArray( cfg_skinning_organ_class + "quantityMinMaxCoef", quant_min_max_coef);
+					
+					float item_quantity = 0;
+
+					
+						while (count > 0) 
+						{
+							added_item = ItemBase.Cast(GetInventory().CreateInInventory(itemName));
+							
+							if (added_item) 
+							{
+								// Read config for quantity value					
+
+								if (quant_min_max_coef.Count() > 0)
+								{
+									float max_to_min = Math.Max(quant_min_max_coef.Get(1) - quant_min_max_coef.Get(0),0);
+									float perk_min = max_to_min * meatCountMod *0.5 + quant_min_max_coef.Get(0); // min increases by 50% of the skill value only
+									float perk_max = (quant_min_max_coef.Get(1) - perk_min) * meatCountMod + perk_min;  // Skill affects difference vs max and minimum. Max increases with skill
+									item_quantity = Math.RandomFloat(perk_min * count , perk_max * count);
+									
+								}
+
+								item_quantity = Math.Min(Math.Round(item_quantity) , added_item.GetQuantityMax()) ;
+								added_item.SetQuantity(item_quantity, false);
+								added_item.SetHealth01("", "", tool.GetHealth01());   //Set health to knife health
+							}
+
+							count = 0;  //maximum 1 stack of feathers
+						}
+					}
+				}
 				else
 				{
 					while (count > 0) {
