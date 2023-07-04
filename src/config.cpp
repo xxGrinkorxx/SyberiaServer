@@ -146,6 +146,8 @@ class CfgSyberia
         shockDecrementOnLowHealthAndBlood = 1.5;
         zombieHitDecreaseMind[] = { 0.4, 5 }; // amount, time
         zombieKillDecreaseMind[] = { 0.2, 10 }; // amount, time
+		playerHitDecreaseMind[]= {0.04,  5}; // amount, time
+		playerKillDecreaseMind[]={0.09,300}; // amount, time 
         antidepresantMindInc[] = { 0.1, 0.25, 0.5 };
         disableLaughterSymptom = 0;
     };
@@ -230,6 +232,8 @@ class CfgSyberia
         
         skillsExpSurvivalIgniteFireSuccess = 500;
         skillsExpSurvivalIgniteFireFailed = 50;
+		skillsExpSurvivalCatchFish=150;
+		skillsExpSurvivalCraftTool=100;
     };
     
     class WorldSystem

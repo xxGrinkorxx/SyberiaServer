@@ -12,6 +12,13 @@ modded class ActionSkinning
 			body_EB.DoSkinning(action_data.m_Player, action_data.m_MainItem);
 			knifeDmgMultiplier = targetObject.ConfigGetFloat("knifeDamageModifier");
 		}
+		else if (targetObject && targetObject.IsInherited(SurvivorBase))
+		{
+			SurvivorBase body_SB = SurvivorBase.Cast(targetObject);
+			body_SB.SetAsSkinned();
+			body_SB.DoSkinning(action_data.m_Player, action_data.m_MainItem);
+			knifeDmgMultiplier = targetObject.ConfigGetFloat("knifeDamageModifier");
+		}
 		else if (targetObject && targetObject.IsInherited(Edible_Base))
 		{
 			Edible_Base edibleBase = Edible_Base.Cast(targetObject);
@@ -30,6 +37,7 @@ modded class ActionSkinning
 			float dmgValue = GetSyberiaConfig().m_animalsButchingKnifeDamage;
 			float decreaseHealthValue = skill * dmgValue * knifeDmgMultiplier;
 			MiscGameplayFunctions.DealAbsoluteDmg(action_data.m_MainItem, decreaseHealthValue);
+			targetObject.Delete();
 		}
 		
 		ItemBase gloves = action_data.m_Player.GetItemOnSlot("Gloves");

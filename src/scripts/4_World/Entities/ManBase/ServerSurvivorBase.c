@@ -1,5 +1,5 @@
-modded class AnimalBase
-{		
+modded class SurvivorBase
+{
 	void DoSkinning(PlayerBase butcher, ItemBase item)
 	{
 		if (m_alreadySkinned)
@@ -25,8 +25,8 @@ modded class AnimalBase
 				count = GetGame().ConfigGetFloat(skinningCfg + " " + skinningChildName + " count");
 				
 				vector pos_rnd = body_pos + Vector(Math.RandomFloat01() - 0.5, 0, Math.RandomFloat01() - 0.5);
-				
-				if (skinningChildName == "ObtainedSteaks")
+		
+				if (skinningChildName == "Steaks")
 				{
 					if (count > 0) 
 					{
@@ -45,7 +45,7 @@ modded class AnimalBase
 						}
 					}
 				}
-				else if (skinningChildName == "ObtainedLard")
+				else if (skinningChildName == "Lard")
 				{
 					if (meatCountMod > 0.3 && count > 0) 
 					{
@@ -63,7 +63,7 @@ modded class AnimalBase
 						}
 					}
 				}
-				else if (skinningChildName == "ObtainedBones")
+				else if (skinningChildName == "Bones")
 				{
 					if (count > 0) 
 					{	
@@ -83,7 +83,7 @@ modded class AnimalBase
 						}
 					}
 				}
-				else if (skinningChildName == "ObtainedGuts")
+				else if (skinningChildName == "Guts")
 				{
 					if (count > 0) 
 					{
@@ -102,14 +102,6 @@ modded class AnimalBase
 						}
 					}
 				}
-				else if (skinningChildName == "ObtainedPelt")
-				{
-					added_item = ItemBase.Cast(GetGame().CreateObjectEx( itemName, pos_rnd, ECE_PLACE_ON_SURFACE ));
-					if (added_item) {
-						added_item.SetTemperature(38);
-						added_item.SetHealth01("", "", skinningMod);
-					}
-				}
 				else
 				{
 					while (count > 0) {
@@ -120,18 +112,7 @@ modded class AnimalBase
 			}
 		}
 		
-		if (this.IsInherited(Animal_GallusGallusDomesticus)) {
-			butcher.AddExperience(SyberiaSkillType.SYBSKILL_HUNTING, GetSyberiaConfig().m_skillsExpHuntingButchSmall);
-		}
-		else if (this.IsInherited(Animal_CanisLupus)) {
-			butcher.AddExperience(SyberiaSkillType.SYBSKILL_HUNTING, GetSyberiaConfig().m_skillsExpHuntingButchWolf);
-		}
-		else if (this.IsInherited(Animal_UrsusArctos)) {
-			butcher.AddExperience(SyberiaSkillType.SYBSKILL_HUNTING, GetSyberiaConfig().m_skillsExpHuntingButchBear);
-		}
-		else {
-			butcher.AddExperience(SyberiaSkillType.SYBSKILL_HUNTING, GetSyberiaConfig().m_skillsExpHuntingButchCommon);
-		}
+		butcher.AddExperience(SyberiaSkillType.SYBSKILL_HUNTING, GetSyberiaConfig().m_skillsExpHuntingButchCommon);
 		
 		m_alreadySkinned = true;
 		
