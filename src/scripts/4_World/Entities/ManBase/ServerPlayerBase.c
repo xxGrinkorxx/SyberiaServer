@@ -2218,6 +2218,16 @@ modded class PlayerBase
 		{
 			super.EEHitBy(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
 		}
+		
+		EntityAI entityKiller = EntityAI.Cast(source);
+		if (entityKiller)
+		{
+			PlayerBase killerPlayer = PlayerBase.Cast(entityKiller.GetHierarchyRootPlayer());
+			if (killerPlayer)
+			{
+				killerPlayer.AddMindDegradation( GetSyberiaConfig().m_playerHitDecreaseMind[0], GetSyberiaConfig().m_playerHitDecreaseMind[1] );
+			}
+		}
 	}
 	
 	override void SetBloodyHands( bool show )
@@ -2375,6 +2385,16 @@ modded class PlayerBase
 		{
 			AddExperience(SyberiaSkillType.SYBSKILL_SURVIVAL, GetSyberiaConfig().m_skillsExpSurvivalIgniteFireFailed);
 		}
+	}
+
+	void AddExperienceOnCraftTool()
+	{
+		AddExperience(SyberiaSkillType.SYBSKILL_SURVIVAL, GetSyberiaConfig().m_skillsExpSurvivalCraftTool);
+	}
+
+	void AddExperienceOnCatchFish()
+	{
+		AddExperience(SyberiaSkillType.SYBSKILL_SURVIVAL, GetSyberiaConfig().m_skillsExpSurvivalCatchFish);
 	}
 	
 	void MarkAsNPC()
