@@ -434,15 +434,13 @@ namespace SyberiaWebPanel
 
                 public int skillsExpSurvivalIgniteFireSuccess = 500;
                 public int skillsExpSurvivalIgniteFireFailed = 50;
+                public int skillsExpSurvivalCatchFish = 150;
+                public int skillsExpSurvivalCraftTool = 100;
             };
 
             public class WorldSystemType
             {
                 public bool winterWorld = false;
-                public float airDayTemperatureMin=10;
-                public float airDayTemperatureMax = 15;
-                public float airNightTemperatureMin = 8;
-                public float airNightTemperatureMax = 12;
                 public float clothingHeatIsolationGlobal = 0.8f;
 
                 public float temperatureHighConsumeItemsMod = 0.02f;
