@@ -204,6 +204,7 @@ modded class SyberiaConfig
 	
 	// World system
 	bool m_isWinterMap;
+	bool m_defrostininventory
 	//float m_airDayTemperatureMin;
     //float m_airDayTemperatureMax;
     //float m_airNightTemperatureMin;
@@ -417,6 +418,13 @@ modded class SyberiaConfig
 		}
 		else {
 			m_isWinterMap = ConfigGetInt("CfgWorlds " + worldName + " winterWorld") == 1;
+		}
+
+		if (GetGame().ConfigIsExisting("CfgSyberia WorldSystem defrostininventory")) {
+			m_defrostininventory = ConfigGetInt("CfgSyberia WorldSystem defrostininventory") == 1;
+		}
+		else {
+			m_defrostininventory = ConfigGetInt("CfgWorlds " + worldName + " defrostininventory") == 1;
 		}
 		
 		/*

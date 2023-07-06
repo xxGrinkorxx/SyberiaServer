@@ -238,7 +238,7 @@ class CfgSyberia
     
     class WorldSystem
     {
-
+    
     };
     
     class Characters

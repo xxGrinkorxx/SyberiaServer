@@ -122,7 +122,11 @@ modded class Environment
 										{
 											pHeat += (itemAtt.GetTemperature() - GameConstants.TEMPERATURE_ITEMS_HEAT_IN_INVENTORY_FROM_BODY);
 										}
+
+										if (itemAtt.GetTemperature() <=0 && GetSyberiaConfig().m_defrostininventory  || itemAtt.GetTemperature() > 0)
+										{
 										ProcessItemHeat(itemAtt, 1, GameConstants.TEMPERATURE_ITEMS_HEAT_IN_INVENTORY_FROM_BODY);
+										}
 									}
 								}
 							}
@@ -146,7 +150,10 @@ modded class Environment
 										{
 											pHeat += (inItem.GetTemperature() - GameConstants.TEMPERATURE_ITEMS_HEAT_IN_INVENTORY_FROM_BODY);
 										}
-										ProcessItemHeat(inItem, 1, GameConstants.TEMPERATURE_ITEMS_HEAT_IN_INVENTORY_FROM_BODY);
+										if (itemAtt.GetTemperature() <=0 && GetSyberiaConfig().m_defrostininventory  || itemAtt.GetTemperature() > 0)
+										{
+										ProcessItemHeat(itemAtt, 1, GameConstants.TEMPERATURE_ITEMS_HEAT_IN_INVENTORY_FROM_BODY);
+										}
 									}
 								}
 							}
@@ -184,7 +191,7 @@ modded class Environment
 			{			
 				item.AddTemperature( Math.Max( GameConstants.ENVIRO_TICK_RATE * GameConstants.TEMPERATURE_ITEM_HEAT_TRANSFER_COEF * -1.0, envTemperature - itemTemperature ));
 			}					
-			else if (itemTemperature < envTemperature) 
+			else if (itemTemperature < envTemperature ) 
 			{
 				item.AddTemperature( Math.Min( GameConstants.ENVIRO_TICK_RATE * GameConstants.TEMPERATURE_ITEM_HEAT_TRANSFER_COEF, envTemperature - itemTemperature ));
 			}

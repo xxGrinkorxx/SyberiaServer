@@ -441,6 +441,7 @@ namespace SyberiaWebPanel
             public class WorldSystemType
             {
                 public bool winterWorld = false;
+                public bool defrostininventory = false;
                 public float clothingHeatIsolationGlobal = 0.8f;
 
                 public float temperatureHighConsumeItemsMod = 0.02f;
